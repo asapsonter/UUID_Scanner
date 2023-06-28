@@ -1,46 +1,59 @@
 package com.plus.sycra;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.plus.sycra.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         com.plus.sycra.databinding.ActivityMainBinding binding = ActivityMainBinding
                 .inflate(getLayoutInflater());
-       // binding = MainActivityBinding.inflate(getLayoutInflater());
+
         setContentView(binding.getRoot());
 
-        // Access views using binding object
-        binding.discover.setText(R.string.discover_txt);
-        binding.grouping.setText(R.string.grouping_txt);
+        NavHostFragment navHostFragment =
+                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_graph);
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+        }
 
-        //Toast message for discover button
-        binding.discover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create and show a toast message for discover button
-                Toast.makeText(MainActivity.this, "You clicked discover", Toast.LENGTH_SHORT).show();
-            }
-        });
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        hideNavBar();
 
-        //Toast message for grouping button
-        binding.grouping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create and show a toast message for grouping button
-                Toast.makeText(MainActivity.this, "You clicked grouping", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
+    public void hideNavBar() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            WindowInsetsControllerCompat windowInsetsController =
+                    new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
 
+            windowInsetsController.setSystemBarsBehavior(
+                    WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            );
+            windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars());
+        }
+    }
 
-
-
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        hideNavBar();
+    }
 }

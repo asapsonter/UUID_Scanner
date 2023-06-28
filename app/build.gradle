@@ -1,19 +1,20 @@
 plugins {
     id 'com.android.application'
+
 }
 
 android {
     namespace 'com.plus.sycra'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.plus.sycra"
-        minSdk 28
-        targetSdk 32
+        minSdk 23
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -33,10 +34,34 @@ android {
 
 dependencies {
 
-    //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.navigation:navigation-fragment:2.6.0'
+    implementation 'androidx.navigation:navigation-ui:2.6.0'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+    // nordic API
+    implementation 'no.nordicsemi.android:ble:2.6.1'
+    implementation 'no.nordicsemi.android.support.v18:scanner:1.4.3'
+   // implementation 'no.nordicsemi.android:thingylib:2.0.0'
+   // implementation 'no.nordicsemi.android:ble-livedata:2.6.1'
+    implementation 'no.nordicsemi.android:mesh:3.3.0'
 }
