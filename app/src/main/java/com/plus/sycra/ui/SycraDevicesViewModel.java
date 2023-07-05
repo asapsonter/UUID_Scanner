@@ -13,7 +13,6 @@ public class SycraDevicesViewModel extends ViewModel {
 
     // generate a getter for livedata
     //mutable Livedata object holding a list of SycraDevice objects
-
     public MutableLiveData<List<SycraDevice>> getDevices(){
         if(devices == null){
             devices = new MutableLiveData<>();
