@@ -38,6 +38,10 @@ public class MainFragment extends Fragment {
         binding = FragmentMainBinding.
                 inflate(inflater, container, false);
         return binding.getRoot();
+
+
+
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

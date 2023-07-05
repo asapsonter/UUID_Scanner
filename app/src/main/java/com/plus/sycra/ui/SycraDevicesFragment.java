@@ -27,6 +27,7 @@ public class SycraDevicesFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentSycraDevicesBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     @Override
